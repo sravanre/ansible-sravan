@@ -1,0 +1,52 @@
+
+---
+- name: getting the production system infor
+  hosts: mygroup
+
+  tasks: 
+  - name: Current time
+    shell: | 
+      uptime | awk '{print $1" ""IST"}' 
+    register: curent_time
+
+  - name: uptime
+    shell: | 
+      uptime | awk '{print $3" "$4" "$5}'
+    register: uptime_prod
+
+  - name: getting myname
+    shell: | 
+      cat /home/user/name
+    register: myname_name
+
+  - name: copy to motd
+    template: 
+      src: /home/user/ansible/system_information.j2
+      dest: /etc/motd
+
+
+- name: getting the Ansible server system information 
+  hosts: myansible
+  become: yes
+
+  tasks:
+  - name: Current time
+    shell: |
+      uptime | awk '{print $1" ""IST"}'
+    register: curent_time
+
+  - name: uptime
+    shell: |
+      uptime | awk '{print $3" "$4" "$5}'
+    register: uptime_prod
+
+  - name: getting myname
+    shell: |
+      cat /home/user/name
+    register: myname_name
+
+  - name: copy to motd
+    template:
+      src: /home/user/ansible/system_information.j2
+      dest: /etc/motd
+     

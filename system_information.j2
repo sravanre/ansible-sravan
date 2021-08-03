@@ -1,0 +1,9 @@
+Production System Details
+
+Operation system : {{ ansible_distribution }}
+Hostname         : {{ ansible_hostname }}
+IP Address       : {{ ansible_default_ipv4.address }}
+Current time     : {{ curent_time.stdout }} 
+Uptime           : {{ uptime_prod.stdout }}
+Your name        : {{ myname_name.stdout }}
+

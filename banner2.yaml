@@ -1,0 +1,25 @@
+---
+- name: copying the content to the /etc/motd
+  hosts: mygroup 
+
+
+  vars:
+    comman_ip: 20.20.20.20
+
+  tasks:
+  - name: getting the value from a local file
+    shell: |
+      cat /etc/hosts | grep -i ansible | awk '{print $1}'
+    register: production_server_ip
+
+
+
+  - name: copying form 1 to other 
+    template:
+      src: /home/user/ansible/banner.j2
+      dest: /tmp/abc
+
+
+  - name: print production_server_ip
+    debug:
+      msg: "{{ production_server_ip }}" 

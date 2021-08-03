@@ -1,0 +1,28 @@
+---
+
+- name: installing apache
+  hosts: mygroup
+  remote_user: root
+
+  vars:
+  
+  tasks:
+  - name: installing apache
+    yum: 
+      name: httpd
+      state: present
+
+
+  - name: restarting apache
+    service:
+      name: httpd
+      state: stopped
+  - name: starting apache 
+    service: 
+      name: httpd
+      state: started 
+    register: status
+  - name: printing the status 
+    debug: 
+      msg: "{{ status }}"
+  

@@ -1,0 +1,7 @@
+---
+- name: debug
+  hosts: myproduction
+  tasks: 
+  - name: print
+    debug:
+      msg: "{{ ansible_hostname }}"

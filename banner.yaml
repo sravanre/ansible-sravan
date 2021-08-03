@@ -1,0 +1,16 @@
+---
+- name: copying the content to the /etc/motd
+  hosts: mygroup 
+
+
+  vars:
+
+  tasks:
+  - name: copying form 1 to other 
+    copy:
+      src: /etc/motd
+      dest: /etc/motd
+      owner: root 
+      group: root
+      mode: 0644
+      backup: yes  ## backing up the older file with the backup option , yes ##

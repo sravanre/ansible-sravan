@@ -1,0 +1,5 @@
+[myansible]
+ansibleserver
+
+[mygroup]
+myproduction ansible_ssh_host=production
