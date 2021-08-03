@@ -1,0 +1,26 @@
+---
+- name: Adding group and user to the system
+  hosts: mygroup 
+  remote_user: root 
+  
+  vars:
+   - user: elmo
+   - group: sysadmin
+   - password: $1$9jtgM/ub$3cpJY/Rs2eiyn3obZmw9X.
+  
+
+  tasks: 
+  - name: adding group 
+    group: 
+      name: "{{ group }}"
+      state: present
+      
+
+
+  - name: adding user
+    user: 
+      name: "{{ user }}"
+      state: present
+      group: "{{ group }}"
+      home: /home/"{{ user }}"
+      password: "{{ password }}"
