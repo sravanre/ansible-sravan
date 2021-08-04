@@ -1,0 +1,24 @@
+---
+- hosts: myproduction:localhost
+  name: restarting copying config to apache
+  become: yes
+  vars:
+    soft_name: httpd 
+  tasks:  
+  - name: copy the conf
+    copy:
+      src: httpd.conf
+      dest: '/etc/httpd/conf/httpd.conf'
+    notify: restart apache
+
+  handlers:
+  - name: restart apache when you it passes 
+    service: 
+      name: "{{ soft_name }}"
+      state: restarted
+    listen: restart apache
+  - name: restart apache
+    debug:
+      msg: " this is {{ soft_name }}restart apache"
+
+ 

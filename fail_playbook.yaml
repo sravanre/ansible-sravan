@@ -1,0 +1,16 @@
+---
+- hosts: mygroup
+  tasks:
+  - name: Print before
+    debug:
+      msg: "Before!"
+
+  - name: fail COPY
+    copy:
+      src: "/aaa/aaa"
+      dest: "/kbskbksc"
+    ignore_errors: yes
+
+  - name: Print after
+    debug:
+      msg: "After!"

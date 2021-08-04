@@ -1,0 +1,12 @@
+--- # asnible conditional example
+- hosts: localhost
+  tasks:
+  - stat: 
+      path: /etc/passwdq
+    register: status
+  - debug:
+      msg: "{{ status }}"  
+  - name: printing the output 
+    debug: 
+      msg: " file exists "
+    when: status.stat.exists 

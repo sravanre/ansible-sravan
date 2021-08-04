@@ -1,9 +1,9 @@
 ---
 
 - name: installing apache
-  hosts: mygroup
+  hosts: mygroup:localhost
   remote_user: root
-
+  serial: 1
   vars:
   
   tasks:
@@ -11,18 +11,27 @@
     yum: 
       name: httpd
       state: present
+    tags:
+      - p
 
 
   - name: restarting apache
     service:
       name: httpd
       state: stopped
+    tags: 
+      - stop
+
   - name: starting apache 
     service: 
       name: httpd
       state: started 
+    tags:
+      - start
     register: status
+
   - name: printing the status 
     debug: 
-      msg: "{{ status }}"
-  
+      msg: "{{ status.changed }}"
+    tags:
+      - d

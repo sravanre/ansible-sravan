@@ -2,6 +2,11 @@
 ---
 - name: getting the production system infor
   hosts: mygroup
+  vars:
+    author: Sravan
+    header: 'Welcome to the server'
+    footer: 'wellsfargo system computers'
+    
 
   tasks: 
   - name: Current time
@@ -11,7 +16,7 @@
 
   - name: uptime
     shell: | 
-      uptime | awk '{print $3" "$4" "$5}'
+      uptime | awk '{print $3" "$4" "$5}' | sed 's/,//g'
     register: uptime_prod
 
   - name: getting myname
@@ -26,8 +31,12 @@
 
 
 - name: getting the Ansible server system information 
-  hosts: myansible
+  hosts: localhost
   become: yes
+  vars:
+    author: Sravan
+    header: 'Welcome to the server'
+    footer: 'wellsfargo system computers'
 
   tasks:
   - name: Current time

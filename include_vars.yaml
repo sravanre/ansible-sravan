@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  vars:
+  
+  tasks:
+  - debug:
+      msg: printing the vars
+
+  - name: reading the file variables
+    include_vars:
+      file: /tmp/vars1.yaml
+      name: myenv
+
+  - name: pring the output 
+    debug:
+      msg:  "{{ myenv.prd.port }} {{ myenv.prd.password }} {{ myenv.uat.password}}"
+      #msg: "{{ myenv.uat.port }}" 

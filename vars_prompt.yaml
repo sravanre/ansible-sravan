@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars_prompt:
+  - name: "myname"
+    prompt: "what is your name"
+
+  - name: "quest"
+    prompt: "what is you quest"
+
+
+  tasks:
+  - name: dfd
+    debug: 
+      msg: "{{ myname }} {{ quest }}"

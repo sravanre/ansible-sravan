@@ -1,0 +1,31 @@
+---
+- name: testing conditions
+  hosts: localhost
+  become: yes
+ 
+  vars:
+  
+  tasks:
+  - name: install httpd /apache
+    yum: 
+      name: httpd
+      state: present
+    when: ansible_distribution == "CentOS"
+
+  - name : install apache on ubuntu
+    package:
+      name: apache2
+      state: present
+    when: ansible_distribution == "Ubuntu"
+
+  - name: restart httpd / apache
+    service: 
+      name: httpd
+      state: restarted
+    when: ansible_distribution == "CentOS"
+
+  - name: restart apache
+    service:
+      name: apache2
+      state: restarted
+    when: ansible_distribution == "Ubuntu"

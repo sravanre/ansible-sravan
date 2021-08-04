@@ -1,0 +1,7 @@
+---
+- name: trying async
+  hosts: localhost
+  tasks: 
+    - command: /bin/sleep 125
+      async: 30
+      poll: 5

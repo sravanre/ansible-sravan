@@ -1,0 +1,8 @@
+---
+- name: reading contenct 
+  hosts: all
+  vars: 
+    varname: "{{ lookup('file', '/tmp/abc') }}"
+  tasks:
+  - debug:
+      msg: "{{ varname }}"

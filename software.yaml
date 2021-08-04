@@ -1,0 +1,21 @@
+---
+- name: installing software on the localhost
+  hosts: localhost
+  become: yes
+  remote_user: root
+
+  vars:
+
+  tasks:
+  - name: installing elinks
+    yum: 
+      name: elinks
+      state: latest
+  - name: more software
+    yum:
+      name: nmap
+      state: latest
+ 
+  - name: print hostname
+    debug:
+      msg: "{{ ansible_hostname }}" 

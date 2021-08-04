@@ -1,9 +1,16 @@
-Production System Details
+{{ '-' * 75 }}
+                {{ header }}
+{{ ansible_hostname }} System Details
 
+{{ '-' * 75 }}
 Operation system : {{ ansible_distribution }}
 Hostname         : {{ ansible_hostname }}
 IP Address       : {{ ansible_default_ipv4.address }}
 Current time     : {{ curent_time.stdout }} 
 Uptime           : {{ uptime_prod.stdout }}
 Your name        : {{ myname_name.stdout }}
+Short Name       : {{ author }}
 
+{{ '-' * 75 }}
+                {{ footer }}
+{{ '-' * 75 }}

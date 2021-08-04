@@ -1,0 +1,15 @@
+--- # exmapleo fo loop in the ansible 
+- name: loop example
+  hosts: myproduction 
+  become: yes 
+
+  vars:
+
+  tasks: 
+  - yum: 
+      name: "{{ item }}"
+      state: absent
+    loop: 
+      - elinks
+      - nginx
+      - bind-utils
