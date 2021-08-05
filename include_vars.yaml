@@ -15,3 +15,7 @@
     debug:
       msg:  "{{ myenv.prd.port }} {{ myenv.prd.password }} {{ myenv.uat.password}}"
       #msg: "{{ myenv.uat.port }}" 
+      #
+      #
+- name: importing another paly
+  import_playbook: rescue.yaml
