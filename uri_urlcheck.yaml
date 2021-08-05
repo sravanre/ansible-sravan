@@ -1,0 +1,23 @@
+---
+ 
+- name: url check 
+  hosts: myproduction 
+  vars: 
+    URL: https://google.com
+  
+  tasks:
+  - name: url checking 
+    uri:
+      url: "{{ URL }}"
+    ignore_errors: yes
+    register: state
+ 
+  - name: printing success message
+    debug: 
+      msg: "{{ URL }} is valid"
+    when: state.status == 200
+
+  - name: printing error
+    debug:
+      msg: "{{ URL }} is not reachable"
+    when: state.status != 200

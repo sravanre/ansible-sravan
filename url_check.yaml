@@ -1,0 +1,24 @@
+---
+- hosts: mygroup
+  name: checking url 
+  vars: 
+    URL: https://gmail.com
+  tasks:
+  - name : using get_url 
+    get_url:
+      url: "{{ URL }}"
+      dest: /tmp/abc
+    register: state
+    ignore_errors: yes
+
+  - name: get the output
+    debug:
+      msg: "{{ URL }} is up. Status code is {{ state.status_code }}"
+    when: state.status_code == 200 
+    ignore_errors: yes 
+
+  - name: failuer output
+    debug: 
+      msg: "{{ URL }} is not up and valid"
+    when: state.status_code is defined 
+
