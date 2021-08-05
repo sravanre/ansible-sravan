@@ -1,0 +1,21 @@
+---
+- hosts: mygroup
+  tasks:
+    - name: add groups
+      group:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - group1
+        - group2
+        - group3
+
+    - name: add several users
+      user:
+        name: "{{ item.name }}"
+        state: present
+        group: "{{ item.groups }}"
+      with_items:
+        - { name: 'user1', groups: 'group1' }
+        - { name: 'user2', groups: 'group2' }
+        - { name: 'user3', groups: 'group3' }

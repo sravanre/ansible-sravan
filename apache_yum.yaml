@@ -1,0 +1,21 @@
+---
+- name: install httpd in production
+  hosts: mygroup
+  remote_user: user
+  become: yes
+  become_method: sudo
+
+  tasks:
+  - name: installing nginx
+    yum:
+      name: nginx
+      state: present
+
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted
+    register: state
+  - name: print
+    debug:
+      msg: "{{ state }}"

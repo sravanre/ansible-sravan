@@ -1,0 +1,9 @@
+---
+- name: with sequence
+  hosts: mygroup
+  tasks: 
+ 
+  - debug: 
+       msg: "t{{ item }}"
+
+    with_sequence: start=2 end=10 stride=2

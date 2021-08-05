@@ -1,0 +1,41 @@
+--- # adding user and group
+
+- name: adding user and grup 
+  hosts: mygroup 
+  
+  become: yes 
+  vars:
+
+  tasks:
+  - name: adding group
+    group: 
+      name: group{{ item }}
+      state: present
+    with_sequence: start=1 end=5
+    tags:
+    - 1 
+ 
+  - name: adding user 
+    user:
+      name: user{{ item }}
+      state: present
+      group: group{{ item }} 
+    with_sequence: start=1 end=5
+    tags:
+    - 2
+
+  - name: checking user and group added or not
+    shell: id {{ item }}
+    with_items: 
+    - user1
+   # - user2
+   # - user3
+    register: status
+    tags:
+    - w
+
+  - name: print output
+    debug:
+      msg: "{{ status.msg.results.stdout }}"
+    tags:
+    - q

@@ -1,0 +1,30 @@
+---
+- name: rescue exampl
+  hosts: mygroup
+  
+  tasks: 
+  - name: block code
+    block: 
+    - name: print Before 
+      debug: 
+        msg: "printing before "
+
+    - name: copy /abc/
+      copy: 
+        src: /tmp/newfiele
+        dest: /tmp/nrew
+
+    - name: print after
+      debug: 
+        msg: " printering After"
+  
+    rescue:
+    - name: printing the rescue mode
+      debug: 
+        msg: "printing the rescue /tmp/newfiele doesn't exists"
+
+    always:
+    - name : always block 
+      debug: 
+        msg: "printing the alway"
+ 

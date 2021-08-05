@@ -9,7 +9,8 @@
   - yum: 
       name: "{{ item }}"
       state: absent
-    loop: 
+    with_items:
+#    loop: 
       - elinks
       - nginx
       - bind-utils

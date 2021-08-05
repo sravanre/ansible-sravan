@@ -1,0 +1,19 @@
+---
+- name: new useradd
+  hosts: localhost
+  tasks:
+  - name:
+    group:
+      name: group{{ item }}
+      state: present
+    with_sequence: start=6 end=7
+  - name: user add
+    user:
+      name: "{{ item.name }}"
+      state: present
+      group: "{{ item.group }}"
+    with_items:
+      - { name: 'user6', group: 'group6' }
+      - { name: 'user7', group: 'group6' }
+      
+ 

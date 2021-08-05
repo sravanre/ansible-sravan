@@ -1,0 +1,55 @@
+---
+- name: isntalling apache on ubuntu and httpd in centos
+  hosts: mygroup:localhost
+  
+  vars:
+  
+  tasks: 
+  - name: installing on Ubuntu
+    block:
+    - name: install
+      package: 
+        name: apache2
+        state: present
+    
+    - name: copy config
+      copy:  
+        src: httpd.conf
+        dest: /var/tmp/httpd111.conf
+      notify: restart apache
+
+    - name: start apache2 on Ubuntu
+      service:
+        name: apache2
+        state: started
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: installing on Centos
+    block:
+    - name: install on httpd on centos
+      yum:
+        name: httpd
+        state: present
+
+    - name: copy config on centos
+      copy:
+        src: httpd.conf
+        dest: /var/tmp/httpd123.conf
+      notify: restart httpd
+
+    - name: start httpd
+      service:
+        name: httpd
+        state: started
+    when: ansible_distribution == 'CentOS'
+
+  handlers:
+  - name: restart httpd
+    service: 
+      name: httpd
+      state: restarted
+  - name: restart apache2
+    service: 
+      name: apache2
+      state: restarted
+
