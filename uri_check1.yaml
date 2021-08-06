@@ -1,0 +1,17 @@
+---
+- name: url check with a  specific keyword
+  hosts: localhost
+  tasks: 
+  - name: url check with uri
+    uri: 
+      url: https://www.atgensoft.com
+      return_content: yes
+    register: state
+    ignore_errors: yes
+
+  - name: check url passed with keyword DevOps
+    debug:
+      msg: "DevOps is present in the website"
+    when: "'DevOps' in state.content"
+
+ 

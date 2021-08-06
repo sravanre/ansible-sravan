@@ -1,0 +1,16 @@
+
+---
+# tasks file for sravanre.apache
+#
+
+- name: installing apache
+  yum: 
+    name: nginx
+    state: present
+
+- name: copy index 
+  copy:
+    src: index.html
+    dest: /usr/share/nginx/html/index.html
+  notify: restart nginx 
+

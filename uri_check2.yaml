@@ -1,0 +1,21 @@
+---
+- name: url check with a  specific keyword
+  hosts: localhost
+
+  tasks:
+  - name: url check with uri
+    get_url:
+      url: https://www.atgensoft.com
+      dest: /tmp/abc1
+      force: yes
+    register: state
+    ignore_errors: yes
+   
+  - name: check the content
+    shell: cat /tmp/abc1 | grep DevOps | grep -v grep 
+    register: state1
+
+  - name: print the result for success
+    debug:
+      msg: "Success"
+    when: "{{ state1 }}"
