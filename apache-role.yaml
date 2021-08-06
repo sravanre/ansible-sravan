@@ -1,0 +1,16 @@
+---
+- name: httpd instal with role
+  hosts: mygroup
+  become: yes 
+  become_user: root
+  
+  roles: 
+  - apache
+
+  post_tasks:
+  - name: copy the jinja template
+    template:
+      src: system_information.j2
+      dest: /tmp/system_information.j2
+    changed_when:
+    notify: restart httpd

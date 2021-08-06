@@ -1,0 +1,8 @@
+---
+# tasks file for apachei
+
+- name: install apache
+  yum:
+    name: httpd
+    state: present
+
