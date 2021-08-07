@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  tasks:
+  - lineinfile:
+      path: /root/.bashrc
+      line: "{{ item }}"
+    loop:
+      - alias ag="ansible-galaxy"
+      - alias kg="kubectl get"
+      - source <(kubectl completion bash)
+      - alias k='kubectl'
+      - alias kdr='kubectl --dry-run=client -o yaml'
+      - alias kg='kubectl get'
+      - alias ka='kubectl apply'
+      - alias kd='kubectl delete'
+      - alias kc='kubectl create'
+      - alias kgp='kubectl get pods -o wide'
+      - alias kgn='kubectl get nodes -o wide'
+      - alias kgs='kubectl get svc'
+      - alias kdd='kubectl describe'
+      - complete -F __start_kubectl k
+      - alias ap="ansible-playbook"
+      - alias ad="ansible-doc"
+      - alias ag="ansible-galaxy"
