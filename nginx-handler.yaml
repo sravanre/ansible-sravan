@@ -1,0 +1,28 @@
+---
+- name: install and configure nginx
+  hosts: localhost
+  vars:
+          software: nginx
+          port: 8089
+          name: Sravan_kUMER_REddy
+
+
+  tasks:
+          - name: uninstall old nginx
+            package: name=nginx state=absent
+          - name: install nginx
+            package: name=nginx state=latest
+          - name: copy the template
+            template: src=/home/sravan/ansible/default.j2 dest=/etc/nginx/sites-available/default
+            notify: nginx restart
+          - name: copy index.html
+            template:
+              src: /home/sravan/ansible/index.html.j2
+              dest: /var/www/html/index.html
+            notify: nginx restart
+  handlers:
+          - name: nginx restart
+            service: name=nginx state=restarted
+            listen: nginx restart
+
+

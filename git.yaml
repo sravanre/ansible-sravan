@@ -1,0 +1,10 @@
+---
+- hosts: "{{ passed_in_hosts }}"
+  become: true
+  become_user: root
+  remote_user: sravan
+  tasks:
+          - name: git clone
+            git:
+                    repo: https://github.com/sravanre/bash_scripts
+                    dest: /tmp/new-git1234

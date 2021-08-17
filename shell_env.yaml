@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no 
+
+
+  tasks:
+  - name: echo api
+    shell: echo $APPI
+    environment:
+      APPI: ssavankumarreddy
+
+    register: resulty
+
+  - name: print the resutlt
+    debug:
+      msg: "{{ resulty.stdout }}"

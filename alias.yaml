@@ -1,0 +1,27 @@
+---
+- hosts: "{{ hosts }}"
+  tasks: 
+  - name: adding line to the /home directory .bashrc file 
+    lineinfile: 
+      path: /root/.bashrc
+      line: #adding alias for the kubernetes and ansible
+      line: source <(kubectl completion bash)
+      line: alias k='kubectl'
+      line: alias kdr='kubectl --dry-run=client -o yaml'
+      line: alias kg='kubectl get'
+      line: alias ka='kubectl apply'
+      line: alias kd='kubectl delete'
+      line: alias kc='kubectl create'
+      line: alias kgp='kubectl get pods -o wide'
+      line: alias kgn='kubectl get nodes -o wide'
+      line: alias kgs='kubectl get svc'
+      line: alias kdd='kubectl describe'
+      line: complete -F __start_kubectl k
+      line: alias ap="ansible-playbook"
+      line: alias ad="ansible-doc"
+      line: alias ag="ansible-galaxy"
+      line: alias a="ansible"
+
+  - name: sourcing the bashrc file
+    shell: |
+      source /root/.bashrc

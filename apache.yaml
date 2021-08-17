@@ -1,37 +1,14 @@
 ---
-
-- name: installing apache
-  hosts: mygroup:localhost
-  remote_user: root
-  serial: 1
-  vars:
-  
+- name: install restart apache2
+  hosts: localhost
+  become: yes 
   tasks:
-  - name: installing apache
-    yum: 
-      name: httpd
+  - name: install apache2
+    apt: 
+      name: apache2
       state: present
-    tags:
-      - p
 
-
-  - name: restarting apache
-    service:
-      name: httpd
-      state: stopped
-    tags: 
-      - stop
-
-  - name: starting apache 
-    service: 
-      name: httpd
-      state: started 
-    tags:
-      - start
-    register: status
-
-  - name: printing the status 
-    debug: 
-      msg: "{{ status.changed }}"
-    tags:
-      - d
+  - name: restart with systemd
+    systemd:
+      name: apache2
+      state: restarted

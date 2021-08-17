@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  connection: local
+  
+  vars:
+    software:
+    - nginx
+    - apache2
+    - elinks
+  tasks:
+  - name: output the software
+    debug: 
+      msg: "{{ software }}"
+
+  - name: install these software 
+    package:
+      name: "{{ item }}"
+      state: present
+    loop:
+    - "{{ software }}" 

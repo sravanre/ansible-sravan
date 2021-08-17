@@ -1,0 +1,6 @@
+- name: Restart the node
+  hosts: localhost
+  task:
+  - reboot:
+    when: restart_nodes
+

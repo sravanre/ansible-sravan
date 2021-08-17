@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  #connection: local
+  remote_user: sravan
+  become_user: root 
+  become: true
+  become_ask_pass: false
+  tasks:
+  - name: clone repo
+    git:
+      repo: https://github.com/sravanre/bash_scripts
+      dest: /var/tmp/sravan_bash
+
+  - name: clone files 
+    get_url:
+      url: https://pkg.jenkins.io/redhat/jenkins.repo
+      dest: /var/tmp/sravan_jenkins
+
+  - name: copy from the cloen
+    file:
+      path: /var/tmp/new_file
+      owner: sravan
+

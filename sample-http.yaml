@@ -1,0 +1,15 @@
+---
+
+- hosts: web
+  remote_user: sravan
+  become_user: root
+  become: yes
+  tasks:
+   - name: install nginx
+     apt:
+        name: nginx
+        state: present
+   - name: stop nginx
+     service:
+        name: nginx
+        state: stopped

@@ -1,0 +1,7 @@
+---
+# Sudoers cmnd alias specification
+sudo_commands_services:
+    - /bin/systemctl
+sudo_commands_main: []
+sudo_commands_misc: []
+sudo_custom_definitions: []

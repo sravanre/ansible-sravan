@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    target_file: "/home/sravan/ansible/install_apache.yaml"
+  tasks:
+  - name: stat module
+    stat:
+      path: "{{ target_file }}"
+
+    register: state
+  - name : ouptut
+    debug:
+      msg: "{{ state }}"
+      
+  - name: copy the in the tmp 
+    command: mv "{{ target_file }}" /tmp/
+    when: state.stat.exists
+    
